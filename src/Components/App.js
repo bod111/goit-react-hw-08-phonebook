@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     const normalizedFilter = this.state.filter.toLowerCase();
-    const filter = this.state.contacts.filter((contact) =>
+    const filteredContacts = this.state.contacts.filter((contact) =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
     return (
@@ -54,7 +54,7 @@ class App extends Component {
         <Section title={"Contacts"}>
           <Filter value={this.state.filter} onChange={this.onChangeFilter} />
           {this.state.contacts.length !== 0 && (
-            <Contacts onDelete={this.onDelete} options={filter} />
+            <Contacts onDelete={this.onDelete} options={filteredContacts} />
           )}
         </Section>
       </>
