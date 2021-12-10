@@ -38,8 +38,9 @@ class App extends Component {
   };
 
   render() {
+    const normalizedFilter = this.state.filter.toLowerCase();
     const filter = this.state.contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
     return (
       <>
