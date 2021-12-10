@@ -1,0 +1,17 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 50px;
+  width: 240px;
+  background-color: aqua;
+  font-weight: 600;
+}
+.input {
+  margin: 10px 0;
+  width: 200px;
+}
+.submitBtn {
+  width: 120px;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import s from './Contacts.module.css'
 
 const Contacts = ({options, onDelete }) => {
   return (
@@ -7,9 +8,10 @@ const Contacts = ({options, onDelete }) => {
       {options.map((option) => {
         return (
           options.lendth !== 0 && (
-            <li key={option.id}>
-              {option.name}:{option.number}
-              <button name={option.id} type="button" onClick={onDelete}>
+            <li className={s.contact} key={option.id}>
+              <span>{option.name }: { option.number}</span>
+              
+              <button className={s.deleteBtn} name={option.id} type="button" onClick={onDelete}>
                 Delete
               </button>
             </li>

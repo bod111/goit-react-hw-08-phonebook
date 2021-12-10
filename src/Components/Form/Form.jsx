@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { nanoid } from 'nanoid'
+import s from './Form.module.css'
 
  class Form extends Component {
   state = {
@@ -38,10 +39,11 @@ import { nanoid } from 'nanoid'
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit}>
+      <form className={s.form} onSubmit={this.onFormSubmit}>
          <label>
           Name
           <input
+            className={s.input}
             value={this.state.name}
             onChange={this.handleChange}
             type="text"
@@ -54,6 +56,7 @@ import { nanoid } from 'nanoid'
         <label>
           Number
           <input
+            className={s.input}
             value={this.state.number}
             onChange={this.handleChange}
             type="tel"
@@ -63,7 +66,7 @@ import { nanoid } from 'nanoid'
             required
           />
         </label>
-         <button type="submit">Add contact</button>
+         <button className={s.submitBtn} type="submit">Add contact</button>
       </form>
     )
   }
