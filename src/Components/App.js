@@ -18,14 +18,14 @@ class App extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     console.log("didUpdate");
-    if (this.state.contacts !== prevState.contacts) {
+    if (this.state.contacts?.length !== prevState.contacts?.length) {
       console.log("up to date");
       localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
     }
   }
   formHandler = (data) => {
-    this.setState((prev) => ({
-      contacts: [...prev.contacts, data],
+    this.setState((prevState) => ({
+      contacts: [...prevState.contacts, data],
     }));
   };
 
