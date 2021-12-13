@@ -9,6 +9,20 @@ class App extends Component {
     contacts: [],
     filter: "",
   };
+  componentDidMount() {
+    const contactsLocal = localStorage.getItem("contacts");
+    const contactsParse = JSON.parse(contactsLocal);
+    if (contactsParse) {
+      this.setState({ contacts: contactsParse });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log("didUpdate");
+    if (this.state.contacts !== prevState.contacts) {
+      console.log("up to date");
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
   formHandler = (data) => {
     this.setState((prev) => ({
       contacts: [...prev.contacts, data],
