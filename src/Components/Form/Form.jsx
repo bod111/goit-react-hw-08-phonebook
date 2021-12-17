@@ -1,51 +1,48 @@
-import React, { Component } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 import { nanoid } from 'nanoid'
 import s from './Form.module.css'
 
- class Form extends Component {
-  state = {
-    name: "",
-    number: "",
-    id: "",
-   };
+ const Form = ({ isNameExist, onSubmit }) => {
+
+   const [name, setName] = useState("");
+   const [number, setNumber] = useState("");
    
-   reset = () => {
-    this.setState({
-      name: "",
-      number: "",
-    });
+   const reset = () => {
+     setName("");
+     setNumber("");
   };
    
-   handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    name === "name" && setName(value);
+    name === "number" && setNumber(value);
    };
    
    
-   onFormSubmit = e => {
+   const onFormSubmit = e => {
      e.preventDefault();
       const newContact = {
-      name: this.state.name,
-      number: this.state.number,
+      name,
+      number,
       id: nanoid(),
      };
-     if (this.props.isNameExist(this.state.name)) {
-      return alert(`${this.state.name} is already in contacts`);
+     if (isNameExist(name)) {
+      return alert(`${name} is already in contacts`);
     }
-    this.props.onSubmit({ ...newContact });
-    this.reset();
+    onSubmit({ ...newContact });
+    reset();
   };
 
-  render() {
+  
     return (
-      <form className={s.form} onSubmit={this.onFormSubmit}>
+      <form className={s.form} onSubmit={onFormSubmit}>
          <label>
           Name
           <input
             className={s.input}
-            value={this.state.name}
-            onChange={this.handleChange}
+            value={name}
+            onChange={handleChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -57,8 +54,8 @@ import s from './Form.module.css'
           Number
           <input
             className={s.input}
-            value={this.state.number}
-            onChange={this.handleChange}
+            value={number}
+            onChange={handleChange}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -70,9 +67,9 @@ import s from './Form.module.css'
       </form>
     )
   }
-}
+
 Form.propTypes = {
-  state: PropTypes.arrayOf(PropTypes.object),
+  isNameExist: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 export default Form
