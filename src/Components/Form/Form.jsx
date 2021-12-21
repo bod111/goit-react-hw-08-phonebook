@@ -1,9 +1,14 @@
-import { useState } from 'react'
-import PropTypes from 'prop-types'
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { nanoid } from 'nanoid'
+import { addToPhonebook } from "../../redux/contacts/contactsActions";
+import { getContacts } from "../../redux/contacts/contactsSelectors";
 import s from './Form.module.css'
 
- const Form = ({ isNameExist, onSubmit }) => {
+export default function Form() {
+    const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
    const [name, setName] = useState("");
    const [number, setNumber] = useState("");
@@ -13,24 +18,34 @@ import s from './Form.module.css'
      setNumber("");
   };
    
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+   const isNameExist = (formState) => {
+    const some = contacts.some(
+      (contact) => contact.name.toLowerCase() === formState.toLowerCase()
+    );
+    return some;
+  };
+  const onChange = (e) => {
+    const { name, value } = e.currentTarget;
     name === "name" && setName(value);
     name === "number" && setNumber(value);
-   };
-   
-   
-   const onFormSubmit = e => {
-     e.preventDefault();
-      const newContact = {
+  };
+  useEffect(() => {
+    if (contacts) {
+      localStorage.setItem("contacts", JSON.stringify(contacts));
+    }
+  }, [contacts]);
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    const newContact = {
       name,
       number,
       id: nanoid(),
-     };
-     if (isNameExist(name)) {
+    };
+
+    if (isNameExist(name)) {
       return alert(`${name} is already in contacts`);
     }
-    onSubmit({ ...newContact });
+    dispatch(addToPhonebook(newContact));
     reset();
   };
 
@@ -42,7 +57,7 @@ import s from './Form.module.css'
           <input
             className={s.input}
             value={name}
-            onChange={handleChange}
+            onChange={onChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -55,7 +70,7 @@ import s from './Form.module.css'
           <input
             className={s.input}
             value={number}
-            onChange={handleChange}
+            onChange={onChange}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -68,8 +83,3 @@ import s from './Form.module.css'
     )
   }
 
-Form.propTypes = {
-  isNameExist: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-export default Form
