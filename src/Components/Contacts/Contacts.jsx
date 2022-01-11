@@ -1,26 +1,29 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { deleteFromPhonebook } from "../../redux/contacts/contactsActions";
-import { getContacts, getFilter } from "../../redux/contacts/contactsSelectors";
-import s from './Contacts.module.css'
+import {
+  deleteContact,
+  getContacts,
+} from "../../redux/contacts/contactsOperations";
+import { getFilteredContacts } from "../../redux/contacts/contactsSelectors";
+import s from "./Contacts.module.css"
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
-  const contacts = useSelector(getContacts);
-  const filterName = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filterContacts = useSelector(getFilteredContacts);
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
+  
   return (
     <ul>
-      {filterName.map((option) => {
+      {filterContacts.map((option) => {
         return (
-          filterName.lendth !== 0 && (
+          filterContacts.lendth !== 0 && (
             <li className={s.contact} key={option.id}>
-              {option.name }:{option.number}
+              {option.name }: {option.phone}
               
-              <button className={s.deleteBtn} name={option.id} type="button" onClick={() => dispatch(deleteFromPhonebook(option.id))}>
+              <button className={s.deleteBtn} name={option.id} type="button" onClick={() => dispatch(deleteContact(option.id))}>
                 Delete
               </button>
             </li>
