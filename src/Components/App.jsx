@@ -28,7 +28,7 @@ const App = () => {
   
   useEffect(() => {
    isLogIn && dispatch(getCurrentUser());
-  }, [dispatch]);
+  }, [dispatch, isLogIn]);
 
   
   console.log("App ~ isLogIn", isLogIn)
