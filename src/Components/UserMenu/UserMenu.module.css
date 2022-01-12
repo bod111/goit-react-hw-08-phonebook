@@ -1,0 +1,13 @@
+.UserMenuButton {
+  padding: 5px 10px;
+  font-size: 15px;
+  background-color: rgb(40, 112, 172);
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid grey;
+  white-space: nowrap;
+}
+.UserMenuButton:focus,
+.UserMenuButton:hover {
+  background-color: white;
+}

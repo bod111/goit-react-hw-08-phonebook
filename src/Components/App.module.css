@@ -1,0 +1,31 @@
+.navMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(219, 194, 125);
+  border-radius: 5px;
+}
+.link {
+  color: #ffffff;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.25s;
+  text-decoration: none;
+  margin-right: 10px;
+}
+.activeLink {
+  color: tomato;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.25s;
+  text-decoration: none;
+
+  margin-right: 10px;
+}

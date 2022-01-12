@@ -34,7 +34,7 @@ export default function Form() {
     e.preventDefault();
     const newContact = {
       name,
-      phone,
+      number : phone,
     };
 
     if (isNameExist(name)) {

@@ -21,7 +21,7 @@ const Contacts = () => {
         return (
           filterContacts.lendth !== 0 && (
             <li className={s.contact} key={option.id}>
-              {option.name }: {option.phone}
+              {option.name }: {option.number}
               
               <button className={s.deleteBtn} name={option.id} type="button" onClick={() => dispatch(deleteContact(option.id))}>
                 Delete

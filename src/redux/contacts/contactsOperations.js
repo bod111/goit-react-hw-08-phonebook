@@ -3,16 +3,26 @@ import * as api from "../../service/Api";
 
 const endpoint = "contacts";
 
-export const getContacts = createAsyncThunk("contacts/getContactsStatus", () =>
-  api.getContacts(endpoint)
+export const getContacts = createAsyncThunk(
+  "contacts/getContactsStatus",
+  (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    return api.getContacts(endpoint, state.autorization.token);
+  }
 );
 
 export const addContact = createAsyncThunk(
   "contact/addContactStatus",
-  (newContact) => api.addContact(endpoint, newContact)
+  (newContact, thunkAPI) => {
+    const state = thunkAPI.getState();
+    return api.addContact(endpoint, newContact, state.autorization.token);
+  }
 );
 
 export const deleteContact = createAsyncThunk(
   "contact/deleteContactStatus",
-  (id) => api.deleteContact(endpoint, id)
+  (id, thunkAPI) => {
+    const state = thunkAPI.getState();
+    return api.deleteContact(endpoint, id, state.autorization.token);
+  }
 );

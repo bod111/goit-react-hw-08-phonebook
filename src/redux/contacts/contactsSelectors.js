@@ -5,8 +5,10 @@ const getFilter = (state) => state.contacts.filter;
 const getFilteredContacts = createSelector(
   [getAllContacts, getFilter],
   (contacts, filter) =>
-    contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    )
+    contacts.length
+      ? contacts.filter(({ name }) =>
+          name.toLowerCase().includes(filter.toLowerCase())
+        )
+      : []
 );
 export { getAllContacts, getFilter, getFilteredContacts };
