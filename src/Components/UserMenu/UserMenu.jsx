@@ -10,7 +10,7 @@ const UserMenu = () => {
     <>
       {name && (
         <div>
-          <span>Добро пожаловать,{name} </span>
+          <span>Hello, {name} </span>
           <button
             className={s.UserMenuButton}
             type="button"

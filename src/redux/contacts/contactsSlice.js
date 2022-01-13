@@ -26,7 +26,7 @@ const contactsSlice = createSlice({
       })
       .addCase(deleteContact.fulfilled, (state, { payload }) => {
         const index = state.items.findIndex(
-          (contact) => contact.id === payload.id
+          (contact) => contact.id === payload
         );
         state.items.splice(index, 1);
       });

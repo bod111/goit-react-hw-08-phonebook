@@ -23,6 +23,8 @@ export const deleteContact = createAsyncThunk(
   "contact/deleteContactStatus",
   (id, thunkAPI) => {
     const state = thunkAPI.getState();
-    return api.deleteContact(endpoint, id, state.autorization.token);
+    return api
+      .deleteContact(endpoint, id, state.autorization.token)
+      .then(() => id);
   }
 );

@@ -17,7 +17,8 @@ const authSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(addNewAccount.fulfilled, (state, { payload }) => {
-      state = payload;
+      state.user = payload.user;
+      state.token = payload.token;
       console.log("builder.addCase ~ payload", payload);
     });
     builder.addCase(loginAccount.fulfilled, (state, { payload }) => {
@@ -27,7 +28,7 @@ const authSlice = createSlice({
     });
 
     builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-      state = payload;
+      state.user = payload;
     });
     builder.addCase(logOut.fulfilled, (state, { payload }) => {
       state.user = { name: "", email: "" };

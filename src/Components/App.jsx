@@ -27,8 +27,8 @@ const App = () => {
   const isLogIn = useSelector((state) => state.autorization.token);
   
   useEffect(() => {
-   isLogIn && dispatch(getCurrentUser());
-  }, [dispatch, isLogIn]);
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   
   console.log("App ~ isLogIn", isLogIn)
@@ -50,7 +50,7 @@ const App = () => {
               <NavLink
                 className={s.link}
                 activeClassName={s.activeLink}
-                to="/Login"
+                to="/login"
                 exact
               >
                 Login
@@ -60,7 +60,7 @@ const App = () => {
               <NavLink
                 className={s.link}
                 activeClassName={s.activeLink}
-                to="/Registration"
+                to="/registration"
                 exact
               >
                 Registration
@@ -71,7 +71,7 @@ const App = () => {
                 exact
                 className={s.link}
                 activeClassName={s.activeLink}
-                to="/ContactsBlock"
+                to="/contacts"
               >
                 Contacts
               </NavLink>
@@ -83,13 +83,13 @@ const App = () => {
       { (
         <Suspense fallback={<h1>Загрузка</h1>}>
           <Switch>
-            <PublicRoute restricted redirectTo="/ContactsBlock" path="/Login">
+            <PublicRoute restricted redirectTo="/contacts" path="/login">
               <Login />
             </PublicRoute>
-            <PublicRoute restricted path="/Registration">
+            <PublicRoute restricted path="/registration">
               <Registration />
             </PublicRoute>
-            <PrivateRoute restricted redirectTo="/Login" path="/ContactsBlock">
+            <PrivateRoute restricted redirectTo="/login" path="/contacts">
               <ContactsBlock />
             </PrivateRoute>
             <Route path="/">
