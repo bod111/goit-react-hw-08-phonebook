@@ -31,7 +31,7 @@ const App = () => {
   }, [dispatch]);
 
   
-  console.log("App ~ isLogIn", isLogIn)
+  // console.log("App ~ isLogIn", isLogIn)
   // const loading = useSelector((state) => state.showContacts);
   return (
     <>

@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   user: { name: "", email: "" },
-  token: "",
+  token: null,
 };
 
 const authSlice = createSlice({
@@ -19,12 +19,12 @@ const authSlice = createSlice({
     builder.addCase(addNewAccount.fulfilled, (state, { payload }) => {
       state.user = payload.user;
       state.token = payload.token;
-      console.log("builder.addCase ~ payload", payload);
+      // console.log("builder.addCase ~ payload", payload);
     });
     builder.addCase(loginAccount.fulfilled, (state, { payload }) => {
       state.user = payload.user;
       state.token = payload.token;
-      console.log("builder.addCase ~ payload", payload);
+      // console.log("builder.addCase ~ payload", payload);
     });
 
     builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
@@ -32,7 +32,7 @@ const authSlice = createSlice({
     });
     builder.addCase(logOut.fulfilled, (state, { payload }) => {
       state.user = { name: "", email: "" };
-      state.token = "";
+      state.token = null;
     });
   },
 });
